@@ -1,27 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Search App</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <div id="landing">
-        <h1> Meet your TV concierge</h1>
-    <h1>Safi Movies</h1>
-    <input type="text" id="search" placeholder="Search for a movie..." />
-    <button onclick="searchMovies()">Search</button>
+
+    <nav class="navbar">
+        <div class="brand-title">Safi Movies</div>
+        <a href="#" class="toggle-button" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </a>
+        <div class="navbar-links" id="navLinks">
+            <ul>
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Genres</a>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="filterGenre('Comedy')">Comedy</a>
+                        <a href="#" onclick="filterGenre('Romantic')">Romantic</a>
+                        <a href="#" onclick="filterGenre('Horror')">Horror</a>
+                        <a href="#" onclick="filterGenre('Action')">Action</a>
+                        <a href="#" onclick="filterGenre('Drama')">Drama</a>
+
+                    </div>
+                </li>
+                <li><a href="#" onclick="showPage('watchlist')">Watchlist</a></li>
+                <li><a href="#" onclick="showPage('about')">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="searching">
+
+        <input type="text" id="search" placeholder="Search for a movie..." />
+        <button onclick="searchMovies()">Search</button>
+
+
+        <h2>Your Watchlist</h2>
+        <div id="watchlist" class="grid"></div>
+
+        <h2>Search Results</h2>
+        <div id="results" class="grid"></div>
+        <script src="index.js"></script>
     </div>
 
-    <h2>Your Watchlist</h2>
-    <div id="watchlist" class="grid"></div>
-
-    <h2>Search Results</h2>
-    <div id="results" class="grid"></div>
-
-    <script src="index.js"></script>
 
 </body>
+
 </html>
