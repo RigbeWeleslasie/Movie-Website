@@ -8,6 +8,33 @@
 </head>
 <body>
 
+    <nav class="navbar">
+  <div class="brand-title">Movie App</div>
+  <a href="#" class="toggle-button" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </a>
+  <div class="navbar-links" id="navLinks">
+    <ul>
+      <li><a href="#" onclick="showPage('home')">Home</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropbtn">Genres</a>
+        <div class="dropdown-content">
+          <a href="#" onclick="filterGenre('Comedy')">Comedy</a>
+          <a href="#" onclick="filterGenre('Romantic')">Romantic</a>
+          <a href="#" onclick="filterGenre('Horror')">Horror</a>
+          <a href="#" onclick="filterGenre('Action')">Action</a>
+          <a href="#" onclick="filterGenre('Drama')">Drama</a>
+          <!-- Add more as needed -->
+        </div>
+      </li>
+      <li><a href="#" onclick="showPage('watchlist')">Watchlist</a></li>
+      <li><a href="#" onclick="showPage('about')">About</a></li>
+    </ul>
+  </div>
+</nav>
+
     <h1>Movie Search App</h1>
     <input type="text" id="search" placeholder="Search for a movie..." />
     <button onclick="searchMovies()">Search</button>
