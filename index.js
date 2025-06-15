@@ -29,13 +29,19 @@ async function searchMovies() {
 
                 movieDiv.innerHTML = `
                     <img src="${posterUrl}" alt="${movie.title} Poster">
-                    <h3>${movie.title} <span style="font-size:.95em; color:#fff;">(${movie.release_date ? movie.release_date.slice(0,4) : 'N/A'})</span></h3>
-                    <p>TMDB Rating: <b>${movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'}</b> ⭐</p>
+                    <h3>${movie.title}(${movie.release_date ? movie.release_date.slice(0,4) : 'Not available'})>(${movie.release_date ? movie.release_date.slice(0,4) : 'Not Available'})</span></h3>
+                     <p>Release Date: <b>${movie.release_date || 'Not available'}</b></p>
+                    <p>TMDB Rating: <b>${movie.vote_average ? movie.vote_average.toFixed(1) : 'Not Available'}</b>⭐</p>
+                     
+  
+
+                    
                     <div class="rating-group">
+
                         <label for="rating-${movie.id}">Your Rating: </label>
                         <input type="number" id="rating-${movie.id}" min="1" max="10" step="0.1" placeholder="7.5">
                     </div>
-                    <button onclick="addToWatchlist(${movie.id}, '${escapeQuotes(movie.title)}', '${movie.poster_path ? movie.poster_path : ''}')">Add to Watchlist</button>
+                    <button onclick="addToWatchlist(${movie.id}, '${escapeQuotes(movie.title)}', '${movie.poster_path ? movie.poster_path : ''}', '${movie.release_date || ''}')">Add to Watchlist</button>
                 `;
                 resultsDiv.appendChild(movieDiv);
             });
@@ -49,7 +55,7 @@ async function searchMovies() {
 }
 
 // Add movie to watchlist
-function addToWatchlist(movieId, title, posterPath) {
+function addToWatchlist(movieId, title, posterPath,release_date) {
     if (watchlist.find(movie => movie.id === movieId)) {
         alert('This movie is already in your watchlist.');
         return;
@@ -62,6 +68,7 @@ function addToWatchlist(movieId, title, posterPath) {
         id: movieId,
         title,
         posterPath,
+        release_date,
         rating: rating && rating > 0 ? rating : 'N/A'
     });
     displayWatchlist();
@@ -97,6 +104,7 @@ function displayWatchlist() {
         item.innerHTML = `
             <img src="${posterUrl}" alt="${movie.title} Poster">
             <h3>${movie.title}</h3>
+            <p>Release Date: <b>${movie.release_date || 'Not available'}</b></p>
             <p>Your Rating: <b>${movie.rating}</b> ⭐</p>
             <button onclick="removeFromWatchlist(${movie.id})">Remove</button>
         `;
