@@ -148,6 +148,13 @@ function searchMoviesByGenre(genreName) {
             }
         });
 
+      } else {
+        resultsDiv.innerHTML = `<p>No ${genreName} movies found.</p>`;
+      }
+    });
+}
+
+
 }
 
 async function fetchUpcomingMovies() {
@@ -180,6 +187,7 @@ async function fetchUpcomingMovies() {
         resultsDiv.innerHTML = '<p style="color:red;">Error fetching upcoming movies. Please try again.</p>';
     }
 }
+
 
 
 
