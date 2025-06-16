@@ -24,11 +24,12 @@ async function searchMovies() {
                 const posterUrl = movie.poster_path ? `https://image.tmdb.org/t/p/w200${movie.poster_path}` : 'https://via.placeholder.com/200x300?text=No+Image';
                 movieDiv.innerHTML = `
                     <img src="${posterUrl}" alt="${movie.title} Poster">
-                    <h3>${movie.title}(${movie.release_date ? movie.release_date.slice(0, 4) : 'Not available'})>(${movie.release_date ? movie.release_date.slice(0, 4) : 'Not Available'})</span></h3>
+                    <h3>${movie.title}(${movie.release_date ? movie.release_date.slice(0, 4) : 'Not available'})</span></h3>
                      <p>Release Date: <b>${movie.release_date}</b></p>
                      <p>TMDB Rating: <b>${movie.vote_average ? movie.vote_average.toFixed(1) : 'Not Available'}</b>⭐</p>
+                      <button onclick="addToWatchlist(${movie.id}, '${movie.title}', '${movie.poster_path ? movie.poster_path : ''}', '${movie.release_date}')">Add to Watchlist</button>
+                 
 
-                    <button onclick="addToWatchlist(${movie.id}, '${movie.title}', '${movie.poster_path ? movie.poster_path : ''}', '${movie.release_date}')">Add to Watchlist</button>
                 `;
                 resultsDiv.appendChild(movieDiv);
             });
@@ -76,6 +77,8 @@ function displayWatchlist() {
         watchlistDiv.innerHTML = '<p>Your watchlist is empty.</p>';
         return;
     }
+
+
     watchlist.forEach(movie => {
         const item = document.createElement('div');
         item.className = 'movie';
@@ -177,7 +180,8 @@ async function fetchUpcomingMovies() {
         resultsDiv.innerHTML = '<p style="color:red;">Error fetching upcoming movies. Please try again.</p>';
     }
 }
-/* <p>Summary:<b>${movie.overview}</b><p></p> */
+
+
 
 
 
