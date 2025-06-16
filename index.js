@@ -34,8 +34,8 @@ async function searchMovies() {
                 <h3>${movie.title} (${movie.release_date ? movie.release_date.slice(0,4) : 'Not available'})</h3>
                 <p>Release Date: <b>${movie.release_date || 'Not available'}</b></p>
                 <p>TMDB Rating: <b>${movie.vote_average ? movie.vote_average.toFixed(1) : 'Not Available'}</b>⭐</p>
-                <div id="${overviewId}" style="display:none; margin:10px 0; padding:10px; background:#f8f8f8; border-radius:5px; color:black;">
-                    <b>Overview:</b> ${movie.overview ? movie.overview : 'No overview available.'}
+                <div id="${overviewId}" style="display:none; margin:10px 0; padding:10px; background:#ffffff0f; border-radius:5px; color:#ddd;">
+                    <b>Overview:</b> ${movie.overview ? `${movie.overview.slice(0,100)}...`: 'No overview available.'}
                 </div>
                 <div class="rating-group">
                     <label for="rating-${movie.id}">Your Rating: </label>
