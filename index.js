@@ -18,33 +18,33 @@ async function searchMovies() {
         const data = await response.json();
 
         if (data.results && data.results.length > 0) {
-            data.results.forEach(movie => {
-                const movieDiv = document.createElement('div');
-                movieDiv.className = 'movie';
-
-                // Fallback for poster
-                const posterUrl = movie.poster_path
-                    ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
-                    : 'https://via.placeholder.com/200x300?text=No+Image';
-
-                movieDiv.innerHTML = `
-                    <img src="${posterUrl}" alt="${movie.title} Poster">
-                    <h3>${movie.title}(${movie.release_date ? movie.release_date.slice(0,4) : 'Not available'})>(${movie.release_date ? movie.release_date.slice(0,4) : 'Not Available'})</span></h3>
-                     <p>Release Date: <b>${movie.release_date || 'Not available'}</b></p>
-                    <p>TMDB Rating: <b>${movie.vote_average ? movie.vote_average.toFixed(1) : 'Not Available'}</b>⭐</p>
-                     
-  
-
-                    
-                    <div class="rating-group">
-
-                        <label for="rating-${movie.id}">Your Rating: </label>
-                        <input type="number" id="rating-${movie.id}" min="1" max="10" step="0.1" placeholder="7.5">
-                    </div>
-                    <button onclick="addToWatchlist(${movie.id}, '${escapeQuotes(movie.title)}', '${movie.poster_path ? movie.poster_path : ''}', '${movie.release_date || ''}')">Add to Watchlist</button>
-                `;
-                resultsDiv.appendChild(movieDiv);
-            });
+          data.results.forEach(movie => {
+            const movieDiv = document.createElement('div');
+            movieDiv.className = 'movie';
+        
+            // Fallback for poster
+            const posterUrl = movie.poster_path
+                ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
+                : 'https://via.placeholder.com/200x300?text=No+Image';
+        
+            const overviewId = `overview-${movie.id}`;
+        
+            movieDiv.innerHTML = `
+                <img src="${posterUrl}" alt="${movie.title} Poster" style="cursor:pointer;" onclick="document.getElementById('${overviewId}').style.display = document.getElementById('${overviewId}').style.display === 'block' ? 'none' : 'block'">
+                <h3>${movie.title} (${movie.release_date ? movie.release_date.slice(0,4) : 'Not available'})</h3>
+                <p>Release Date: <b>${movie.release_date || 'Not available'}</b></p>
+                <p>TMDB Rating: <b>${movie.vote_average ? movie.vote_average.toFixed(1) : 'Not Available'}</b>⭐</p>
+                <div id="${overviewId}" style="display:none; margin:10px 0; padding:10px; background:#f8f8f8; border-radius:5px; color:black;">
+                    <b>Overview:</b> ${movie.overview ? movie.overview : 'No overview available.'}
+                </div>
+                <div class="rating-group">
+                    <label for="rating-${movie.id}">Your Rating: </label>
+                    <input type="number" id="rating-${movie.id}" min="1" max="10" step="0.1" placeholder="7.5">
+                </div>
+                <button onclick="addToWatchlist(${movie.id}, '${escapeQuotes(movie.title)}', '${movie.poster_path ? movie.poster_path : ''}', '${movie.release_date || ''}')">Add to Watchlist</button>
+            `;
+            resultsDiv.appendChild(movieDiv);
+        });
         } else {
             resultsDiv.innerHTML = '<p>No movies found.</p>';
         }
