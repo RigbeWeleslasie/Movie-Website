@@ -35,14 +35,11 @@ async function searchMovies() {
                 <h3>${movie.title} (${movie.release_date ? movie.release_date.slice(0,4) : 'Not available'})</h3>
                 <p>Release Date: <b>${movie.release_date || 'Not available'}</b></p>
                 <p>TMDB Rating: <b>${movie.vote_average ? movie.vote_average.toFixed(1) : 'Not Available'}</b>⭐</p>
-                <div id="${overviewId}" style="display:none; margin:10px 0; padding:10px; background:#ffffff0f; border-radius:5px; color:#ddd;">
-                    <b>Overview:</b> ${movie.overview ? `${movie.overview.slice(0,100)}...`: 'No overview available.'}
-                </div>
                 <div class="rating-group">
                     <label for="rating-${movie.id}">Your Rating: </label>
                     <input type="number" id="rating-${movie.id}" min="1" max="10" step="0.1" placeholder="7.5">
                 </div>
-                <button onclick="addToWatchlist(${movie.id}, '${escapeQuotes(movie.title)}', '${movie.poster_path ? movie.poster_path : ''}', '${movie.release_date || ''}')">Add to Watchlist</button>
+                <button onclick="addToWatchlist(${movie.id}, '${movie.title}', '${movie.poster_path ? movie.poster_path : ''}', '${movie.release_date || ''}')">Add to Watchlist</button>
             `;
             resultsDiv.appendChild(movieDiv);
         });
@@ -57,6 +54,7 @@ async function searchMovies() {
                      <p>Release Date: <b>${movie.release_date}</b></p>
                      <p>TMDB Rating: <b>${movie.vote_average ? movie.vote_average.toFixed(1) : 'Not Available'}</b>⭐</p>
                       <button onclick="addToWatchlist(${movie.id}, '${movie.title}', '${movie.poster_path ? movie.poster_path : ''}', '${movie.release_date}')">Add to Watchlist</button>
+                      
                  
 
                 `;
@@ -211,7 +209,6 @@ async function fetchUpcomingMovies() {
         resultsDiv.innerHTML = '<p style="color:red;">Error fetching upcoming movies. Please try again.</p>';
     }
 }
-
 
 
 
