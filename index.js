@@ -22,8 +22,6 @@ async function searchMovies() {
           data.results.forEach(movie => {
             const movieDiv = document.createElement('div');
             movieDiv.className = 'movie';
-        
-            // Fallback for poster
             const posterUrl = movie.poster_path
                 ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
                 : 'https://via.placeholder.com/200x300?text=No+Image';
@@ -35,31 +33,11 @@ async function searchMovies() {
                 <h3>${movie.title} (${movie.release_date ? movie.release_date.slice(0,4) : 'Not available'})</h3>
                 <p>Release Date: <b>${movie.release_date || 'Not available'}</b></p>
                 <p>TMDB Rating: <b>${movie.vote_average ? movie.vote_average.toFixed(1) : 'Not Available'}</b>⭐</p>
-                <div class="rating-group">
-                    <label for="rating-${movie.id}">Your Rating: </label>
-                    <input type="number" id="rating-${movie.id}" min="1" max="10" step="0.1" placeholder="7.5">
-                </div>
+               
                 <button onclick="addToWatchlist(${movie.id}, '${movie.title}', '${movie.poster_path ? movie.poster_path : ''}', '${movie.release_date || ''}')">Add to Watchlist</button>
             `;
             resultsDiv.appendChild(movieDiv);
         });
-
-            data.results.forEach(movie => {
-                const movieDiv = document.createElement('div');
-                movieDiv.className = 'movie';
-                const posterUrl = movie.poster_path ? `https://image.tmdb.org/t/p/w200${movie.poster_path}` : 'https://via.placeholder.com/200x300?text=No+Image';
-                movieDiv.innerHTML = `
-                    <img src="${posterUrl}" alt="${movie.title} Poster">
-                    <h3>${movie.title}(${movie.release_date ? movie.release_date.slice(0, 4) : 'Not available'})</span></h3>
-                     <p>Release Date: <b>${movie.release_date}</b></p>
-                     <p>TMDB Rating: <b>${movie.vote_average ? movie.vote_average.toFixed(1) : 'Not Available'}</b>⭐</p>
-                      <button onclick="addToWatchlist(${movie.id}, '${movie.title}', '${movie.poster_path ? movie.poster_path : ''}', '${movie.release_date}')">Add to Watchlist</button>
-                      
-                 
-
-                `;
-                resultsDiv.appendChild(movieDiv);
-            });
 
         } else {
             resultsDiv.innerHTML = '<p>No movies found.</p>';
@@ -136,6 +114,7 @@ function filterGenre(genre) {
     showPage('home');
     document.getElementById('navLinks').classList.remove('active');
 }
+
 function searchMoviesByGenre(genreName) {
     const genreMap = {
         'Comedy': 35,
@@ -164,10 +143,7 @@ function searchMoviesByGenre(genreName) {
     <h3>${movie.title} (${movie.release_date ? movie.release_date.slice(0, 4) : 'Not available'})</h3>
     <p>Release Date: <b>${movie.release_date || 'Not available'}</b></p>
     <p>TMDB Rating: <b>${movie.vote_average ? movie.vote_average.toFixed(1) : 'Not available'}</b> ⭐</p>
-    <div class="rating-group">
-        <label for="rating-${movie.id}">Your Rating: </label>
-        <input type="number" id="rating-${movie.id}" min="1" max="10" step="0.1" placeholder="">
-    </div>
+    
     <button onclick="addToWatchlist(${movie.id}, '${movie.title}', '${movie.poster_path ? movie.poster_path : ''}', '${movie.release_date}')">Add to Watchlist</button>`;
                     resultsDiv.appendChild(movieDiv);
                 });
@@ -198,6 +174,7 @@ async function fetchUpcomingMovies() {
                     <p>Release Date: <b>${movie.release_date || 'Not available'}</b></p>
                     <p>TMDB Rating: <b>${movie.vote_average ? movie.vote_average.toFixed(1) : 'Not available'}</b>⭐</p>
                     <button onclick="addToWatchlist(${movie.id}, '${movie.title}', '${movie.poster_path ? movie.poster_path : ''}', '${movie.release_date}')">Add to Watchlist</button>
+                    
                 `;
                 resultsDiv.appendChild(movieDiv);
             });
@@ -210,6 +187,12 @@ async function fetchUpcomingMovies() {
     }
 }
 
+
+function toggleOverview(overviewId) {
+    const overviewElement = document.getElementById(overviewId);
+    overviewElement.style.display = overviewElement.style.display === 'none' ? 'block' : 'none';
+}
+                   
 
 
 
