@@ -37,12 +37,16 @@
             </ul>
         </div>
     </nav>
+    <div class="app-page" id="page-home" style="display:block;">
+        <div id="watchlist"></div>
 
-    <div id="searching">
 
+
+
+        <h1>Movie Search App</h1>
         <input type="text" id="search" placeholder="Search for a movie..." />
         <button onclick="searchMovies()">Search</button>
-
+        <button onclick="fetchUpcomingMovies()">See Upcoming Movies</button>
 
         <h2>Your Watchlist</h2>
         <div id="watchlist" class="grid"></div>
